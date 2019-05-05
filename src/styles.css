@@ -1,1 +1,71 @@
 /* You can add global styles to this file, and also import other style files */
+
+#home {
+    text-align: center;
+    color: darkred;
+    display: flex;
+    justify-content: center;
+    height: calc(100vh - 42px);
+    flex-direction: column;
+    width: 100vw;
+    background-size: cover;
+    background-attachment: fixed;
+    background-image: url("https://images.pexels.com/photos/1148399/pexels-photo-1148399.jpeg?cs=srgb&dl=background-book-stack-books-1148399.jpg&fm=jpg");
+}
+
+#home h1 {
+    background-color: rgba(255, 255, 255, 0.65);
+    padding: 40px 0;
+}
+
+h2 {
+    margin-top: 50px !important;
+}
+
+.ui.menu {
+    margin-bottom: 0 !important;
+}
+
+.ui.header.price, .price {
+    margin-top: 0;
+    color: #ff6f00;
+}
+
+.ui.button:not(.trash):not(.amount):not(.noMargin) {
+    margin-top: 40px !important;
+}
+
+.container {
+    margin: 40px !important;
+}
+
+.home.ui.button{
+    width: 200px;
+    align-self: center;
+}
+
+.cart.ui.button {
+    width: 200px !important;
+}
+
+.amount.ui.button {
+    padding: 4px;
+}
+
+.trash.ui.button {
+    width: 70px;
+}
+
+.background {
+    background-image: url(https://images.pexels.com/photos/1148399/pexels-photo-1148399.jpeg?cs=srgb&dl=background-book-stack-books-1148399.jpg&fm=jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    min-height: webkit-fill-available;
+    min-height: 100%;
+}
+
+.background-dimmer {
+    background-color: rgba(255, 255, 255, 0.65);
+    min-height: webkit-fill-available;
+    min-height: 100vh;
+}

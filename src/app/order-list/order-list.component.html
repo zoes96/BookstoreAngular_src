@@ -1,0 +1,17 @@
+
+<div class="container ui middle aligned selection divided list" *ngIf="users">
+    <h1>Übersicht der Bestellungen</h1>
+    <a *ngFor="let user of users" class="item bs-user"
+       [user]="user">
+
+    </a>
+
+    <div *ngIf="!users" class="ui active dimmer">
+        <div class="ui large text loader">Bestellübersicht wird geladen...</div>
+    </div>
+
+    <p *ngIf="users && !users.length">
+        Es sind keine Bestellungen vorhanden!
+    </p>
+
+</div>

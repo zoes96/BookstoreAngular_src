@@ -1,0 +1,18 @@
+<div class="content" *ngIf="user">
+  <h2>{{user.userInfo[0]['firstName']}} {{user.userInfo[0]['lastName']}} - ID:{{ user.user_id }}</h2>
+  <div class="orders">
+    <div *ngFor="let order of user.orders; last as l">
+        <hr>
+        <h3 class="date">Bestellnummer: {{order['id']}}</h3>
+        <div class="date">Bestelldatum: {{order['created_at']}}</div>
+        <div class="state">Status: {{order['states'][0].name}}</div>
+        <div class="comment"> Kommentar: {{order['states'][0].comment}}</div>
+        <div class="ui mini orange fade animated button" (click)="editOrder(order['id'])" tabindex="0">
+            <div class="visible content">Zur Bestellung</div>
+            <div class="hidden content">
+                <i class="right arrow icon"></i>
+            </div>
+        </div>
+      </div>
+  </div>
+</div>

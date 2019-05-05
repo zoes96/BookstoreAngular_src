@@ -1,0 +1,26 @@
+<div class="content">
+  <h2>Bestellnummer: {{ order.id }}</h2>
+  <p class="state">
+    Status: {{order.states[0].name}}<br/>
+    Bestelldatum: {{order.created_at | date:'dd.MM.yyyy, HH:mm'}} Uhr
+  </p>
+  <div class="price">Nettopreis: {{order.nettoPrice}} €</div>
+  <div class="price">Bruttopreis: {{order.bruttoPrice}} €</div>
+
+  <h3>Bestellung</h3>
+  <div class="orderpositions">
+      <span *ngFor="let pos of order.order_positions; last as l">
+        <a class="price" [routerLink]="['../books/',books[pos.book_id].isbn]">
+          {{ books[pos.book_id].title }}, {{ books[pos.book_id].subtitle }} - {{ pos.amount }} Stück
+        </a>
+        <br *ngIf="!l"/>
+      </span>
+  </div>
+
+  <div class="ui mini orange fade animated button" (click)="editOrder(order['id'])" tabindex="0">
+    <div class="visible content">Zur Bestellung</div>
+    <div class="hidden content">
+      <i class="right arrow icon"></i>
+    </div>
+  </div>
+</div>

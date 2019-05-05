@@ -1,0 +1,24 @@
+<img class="ui tiny image"
+     *ngIf="book?.images[0]"
+     [src]="book.images[0].url">
+<div class="content">
+  <div class="header">{{ book.title }}</div>
+  <div class="price">{{book.currentNetto}} €</div>
+  <div class="amount">Menge:
+      <input (change)="changeAmount(book.isbn)" class="ui tiny button amount" type="number" name="amount" min="1" max="10" value="{{book.amount}}"/>
+  </div>
+  <div class="description"> {{ book.subtitle }} </div>
+  <div class="metadata">
+      <span *ngFor="let author of book.authors; last as l">
+        {{ author.firstName }} {{ author.lastName }}<span *ngIf="!l">, </span>
+      </span>
+  </div>
+  <div class="extra">ISBN {{ book.isbn }}</div>
+
+    <div class="ui mini orange fade animated orange button trash" (click)="removeItemFromCart(book.isbn)" tabindex="0">
+        <div class="hidden content">Entfernen</div>
+        <div class="visible content">
+            <i class="trash icon"></i>
+        </div>
+    </div>
+</div>

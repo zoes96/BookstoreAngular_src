@@ -1,0 +1,107 @@
+<!--suppress BuyFluidPluginNoteInspection -->
+<div class="container ui middle aligned selection divided list" *ngIf="order">
+    <h1>Bestellnummer: {{order.id}}</h1>
+    <div class="content">
+      <div class="user">
+        <h2>{{order.firstName}} {{order.lastName}}</h2>
+        <p>
+          <b>Lieferadresse:</b><br/>
+          {{order.street}}<br/>
+          {{order.postcode}} {{order.city}}<br/>
+          {{order.name}}<br/>
+        </p>
+      </div>
+      <div class="orderPositions">
+        <h2>Bestellpositionen</h2>
+        <div *ngFor="let pos of order.order_positions; last as l">
+          <div class="content">
+            <hr/>
+            Buch-ID: {{pos['book_id']}}<br/>
+            Menge: {{pos['amount']}}<br/>
+            Nettopreis: {{pos['currentNettoCopy']}}
+            <hr *ngIf="l"/>
+          </div>
+        </div>
+      </div>
+      <div class="calculation">
+        <h2>Preis</h2>
+        <table class="ui celled table">
+          <tbody>
+          <tr>
+            <td data-label="nettoPrice">Nettopreis</td>
+            <td data-label="nettoPrice">{{order.nettoPrice}} €</td>
+          </tr>
+          <tr>
+            <td data-label="tax">Steuersatz ({{order.name}})</td>
+            <td data-label="tax">{{order.tax}}%</td>
+          </tr>
+          <tr>
+            <td data-label="bruttoPrice"><span class="price">Bruttopreis</span></td>
+            <td data-label="bruttoPrice"><span class="price">{{order.bruttoPrice}} €</span> </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngIf="!editing" class="state">
+        <h2>Status</h2>
+        <p>
+          Status: {{order.states[statesLength]['name']}}<br/>
+          <span *ngIf="isAdmin() && order.states[statesLength]['comment']">Kommentar: {{order.states[statesLength]['comment']}}<br/></span>
+          Datum: {{order.states[statesLength]['created_at'] | date:'dd.MM.yyyy, HH:mm'}} Uhr
+        </p>
+        <div *ngIf="isAdmin()" class="ui orange fade animated orange button noMargin" (click)="editState()" tabindex="0">
+          <div class="visible content">Status bearbeiten</div>
+          <div class="hidden content">
+            <i class="edit icon"></i>
+          </div>
+        </div>
+        <div *ngIf="!history && isAdmin()" class="ui orange fade animated orange button noMargin" (click)="showHistory()" tabindex="0">
+          <div class="visible content">Status History</div>
+          <div class="hidden content">
+            <i class="down arrow icon"></i>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="editing && isAdmin()" class="state">
+        <h2>Status</h2>
+        <select class="button ui noMargin" id="stateEditor">
+          <option value="Offen">Offen</option>
+          <option value="Bezahlt">Bezahlt</option>
+          <option value="Versendet">Versendet</option>
+          <option value="Storniert">Storniert</option>
+        </select>
+        <div class="ui input">
+          <input type="text" id="stateComment" placeholder="Kommentar"/>
+        </div>
+        <br/>
+        <div class="ui fade animated button" (click)="cancel()" tabindex="0">
+          <div class="visible content">Abbrechen</div>
+          <div class="hidden content">
+            <i class="cancel icon"></i>
+          </div>
+        </div>
+        <div class="ui orange fade animated orange button" (click)="saveState()" tabindex="0">
+          <div class="visible content">Speichern</div>
+          <div class="hidden content">
+            <i class="save icon"></i>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="history && isAdmin()" class="state">
+        <h2>Status History</h2>
+        <div *ngFor="let state of order.states; last as l">
+          <hr/>
+          Status: {{state.name}}<br/>
+          Kommentar: {{state.comment}}<br/>
+          Datum: {{state.created_at | date:'dd.MM.yyyy, HH:mm'}} Uhr
+          <hr *ngIf="l"/>
+        </div>
+        <div class="ui orange fade animated orange button noMargin" (click)="hideHistory()" tabindex="0">
+          <div class="visible content">History ausblenden</div>
+          <div class="hidden content">
+            <i class="up arrow icon"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

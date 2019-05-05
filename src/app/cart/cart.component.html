@@ -1,0 +1,50 @@
+
+<div class="container ui middle aligned selection divided list">
+  <h1>Warenkorb</h1>
+  <p *ngIf="books && books.length">Du hast folgende Bücher in den Warenkorb gelegt. Bitte überprüfe deine Eingaben und klicke unten auf Bestellen!</p>
+  <div *ngFor="let book of books" class="item bs-cart-list-item" id={{book.isbn}}
+     [book]="book">
+
+  </div>
+
+  <div *ngIf="!books" class="ui active dimmer">
+    <div class="ui large text loader">Warenkorb wird geladen...</div>
+  </div>
+
+  <p *ngIf="books && !books.length">
+    Es sind keine Bücher vorhanden!
+  </p>
+
+  <div *ngIf="isLoggedIn() && tax && books && books.length">
+    <h2>*** Jetzt bestellen ***</h2>
+    <table class="ui celled table">
+      <tbody>
+      <tr>
+        <td data-label="nettoPrice">Nettopreis</td>
+        <td data-label="nettoPrice">{{(netto).toFixed(2)}} €</td>
+      </tr>
+      <tr>
+        <td data-label="tax">Steuersatz</td>
+        <td data-label="tax">{{tax}} %</td>
+      </tr>
+      <tr>
+        <td data-label="bruttoPrice"><span class="price">Bruttopreis</span></td>
+        <td data-label="bruttoPrice"><span class="price">{{(netto*(tax+100)/100).toFixed(2)}} €</span> </td> <!-- {{netto*(tax+100)/100}} -->
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div [routerLink]="'/books'" class="ui fade animated button" tabindex="0">
+    <div class="visible content">Zurück zur Liste</div>
+    <div class="hidden content">
+      <i class="left arrow icon"></i>
+    </div>
+  </div>
+  <div *ngIf="books && books.length" (click)="createOrder()" class="ui olive animated fade animated button" tabindex="0">
+    <div class="visible content">Bestellen</div>
+    <div class="hidden content">
+      <i class="right arrow icon"></i>
+    </div>
+  </div>
+</div>

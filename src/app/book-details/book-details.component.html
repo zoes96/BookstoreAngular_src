@@ -1,0 +1,59 @@
+<!--suppress BuyFluidPluginNoteInspection -->
+<div class="container">
+  <div class="ui grid" *ngIf="book"  id={{book.isbn}}>
+    <div class="four wide column">
+      <img class="ui large image" *ngIf="book.images && book.images[0]"
+           [src]="book.images[0].url">
+    </div>
+    <div class="twelve wide column">
+      <h1 class="ui header">{{ book.title }}</h1>
+      <h3 class="ui header">{{ book.subtitle }}</h3>
+      <h3 class="ui header price">{{ book.currentNetto }}</h3>
+      <div class="ui divider"></div>
+      <div class="ui grid">
+        <div class="four wide column">
+          <h4 class="ui header">Autoren</h4>
+          <span *ngFor="let author of book.authors; last as l">
+         {{ author.firstName }} {{ author.lastName }}<span *ngIf="!l">, </span>
+       </span>
+        </div>
+        <div class="four wide column">
+          <h4 class="ui header">ISBN</h4>
+          {{ book.isbn }}
+        </div>
+        <div class="four wide column">
+          <h4 class="ui header">Erschienen</h4>
+          {{ book.published }}
+        </div>
+        <div class="four wide column">
+          <h4 class="ui header">Rating</h4>
+          <i *ngFor="let r of getRating(book.rating)" class="yellow star icon"></i>
+        </div>
+      </div>
+    </div>
+    <div class="sixteen wide column">
+      <h3 class="ui header">Beschreibung</h3>
+      {{ book.description }}
+    </div>
+    <div class="sixteen wide column">
+      <div class="ui small images">
+        <img *ngFor="let thumbnail of book.images" [src]="thumbnail.url">
+      </div>
+    </div>
+  </div>
+  <button *ngIf="isLoggedIn() && checkIfAdmin()" class="ui orange button labeled icon" [routerLink]="['../../admin', book?.isbn]"><i class="write icon"></i>Buch bearbeiten</button>
+  <button *ngIf="isLoggedIn() && checkIfAdmin()" class="ui orange button labeled icon" (click)="removeBook()"><i class="remove icon"></i>Buch löschen</button>
+<br/>
+  <div [routerLink]="'/books'" class="ui fade animated button" tabindex="0">
+    <div class="visible content">Zurück zur Liste</div>
+    <div class="hidden content">
+      <i class="left arrow icon"></i>
+    </div>
+  </div>
+  <div (click)="addToCart(book.isbn)" [routerLink]="'/cart'" class="ui cart olive fade animated button" tabindex="0">
+    <div class="hidden content">Zum Warenkorb hinzufügen</div>
+    <div class="visible content">
+      <i class="shop icon"></i>
+    </div>
+  </div>
+ </div>

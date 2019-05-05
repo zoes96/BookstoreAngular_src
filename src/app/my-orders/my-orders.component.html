@@ -1,0 +1,17 @@
+
+<div class="container ui middle aligned selection divided list">
+  <h1>Meine Bestellungen</h1>
+  <a *ngFor="let order of orders" class="item bs-order-list-item"
+     [order]="order">
+
+  </a>
+
+  <div *ngIf="!orders" class="ui active dimmer">
+    <div class="ui large text loader">Bestellungen werden geladen...</div>
+  </div>
+
+  <p *ngIf="orders && !orders.length">
+    Es sind keine Bestellungen vorhanden!
+  </p>
+
+</div>
