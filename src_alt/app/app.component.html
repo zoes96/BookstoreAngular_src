@@ -1,0 +1,33 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+<!----------------- NAVIGATION ------------------->
+<div class="ui two item tabs menu">
+    <a routerLink="home" routerLinkActive="active" class="item">Home</a>
+    <a routerLink="books" routerLinkActive="active" class="item">Bücher</a>
+</div>
+
+<!---------------- INHALTE -------------------->
+<router-outlet></router-outlet>
+
+
+<!--
+<h1>
+  Willkommen im {{ title | uppercase }}!
+</h1>
+Hallo {{person?.name}}! <!-- ?, damit kein Fehler entsteht, wenn Person nicht extistiert-->
+<!--
+
+
+<p><a [href]="myUrl">Ein Link!</a></p>
+
+<button (click)="myClickhandler()">Click me</button>
+
+<p>
+  <input type="text" [(ngModel)]="title"/>
+</p>
+
+<div *ngIf="true"><!-- Condition im DOM, geht auch mit Schleifen, ... -->
+<!--
+  Lorem ipsum
+</div>
+-->

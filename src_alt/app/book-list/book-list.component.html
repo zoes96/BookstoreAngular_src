@@ -1,0 +1,4 @@
+<div class="ui middle aligned selection divided list">
+  <a *ngFor="let book of books" class="item bs-book-list-item"
+  [book]="book" [routerLink]="book.isbn"></a> <!-- durch die class bs-book-list-item wird der Selektor der Komponente aktiv und an dieser Stelle die Items reingerendert (Buch muss dafür übergeben werden mit Property-Binding -->
+</div>
